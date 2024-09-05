@@ -18,6 +18,10 @@ if (!mysqlPassword) {
   throw new Error('There is no mysql password env. Check please.');
 }
 
+if (!mysqlDatabase) {
+  throw new Error('There is no mysql database env. Check please,');
+}
+
 export const docs = {
   server: {
     port: serverPort,
@@ -27,5 +31,6 @@ export const docs = {
     port: 3306,
     username: mysqlUsername,
     password: mysqlPassword,
+    database: mysqlDatabase,
   },
 };

@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 
 @Entity()
-export abstract class Aggregate {
+export abstract class Aggregate<T> {
   @PrimaryGeneratedColumn()
   id!: number;
 
