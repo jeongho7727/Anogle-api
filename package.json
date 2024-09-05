@@ -1,0 +1,36 @@
+{
+  "name": "anogle-api",
+  "version": "1.0.0",
+  "description": "처음 테스트",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "NODE_ENV=development ts-node-dev --respawn --transpile-only -r dotenv/config src/server.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/koa": "^2.15.0",
+    "@types/uuid": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.30.0",
+    "prettier": "^3.3.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "-": "^0.0.1",
+    "@koa/router": "^13.0.0",
+    "dotenv": "^16.4.5",
+    "koa": "^2.15.3",
+    "mysql2": "^3.11.0",
+    "reflect-metadata": "^0.2.2",
+    "typedi": "^0.10.0",
+    "typeorm": "^0.3.20",
+    "uuid": "^10.0.0"
+  }
+}

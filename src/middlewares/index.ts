@@ -1,0 +1,1 @@
+export { uuidMiddleware } from './uuid';
