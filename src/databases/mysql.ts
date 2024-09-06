@@ -2,7 +2,6 @@ import { DataSource } from 'typeorm';
 import { Container } from 'typedi';
 import { dataSourceMap } from '../libs/typeorm';
 import entities from './entities';
-import 'reflect-metadata';
 
 export const datasource = new DataSource({
   type: 'mysql',
