@@ -5,6 +5,7 @@ import { datasource } from './databases/mysql';
 import { dependencyInjectorMiddleware, uuidMiddleware } from './middlewares';
 import { globalRouter } from './routes';
 import { docs } from './config';
+import { requestLoggerMiddleware } from './middlewares/request-logger';
 
 // NOTE: 옮기자
 
@@ -14,6 +15,8 @@ import { docs } from './config';
   const app = new Koa();
 
   app.use(uuidMiddleware);
+  app.use(requestLoggerMiddleware);
+
   app.use(dependencyInjectorMiddleware);
 
   // NOTE: routes (Don't touch.)

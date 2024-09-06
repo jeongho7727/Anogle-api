@@ -10,8 +10,8 @@ router.post('/users/sign-up', async (ctx: Context) => {
 
   const userService = context.get(UserService);
 
-  await userService.add();
-  ctx.body = 'hi';
+  await userService.signup();
+  ctx.body = {};
 });
 
 export default router;

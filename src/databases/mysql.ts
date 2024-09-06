@@ -2,12 +2,13 @@ import { DataSource } from 'typeorm';
 import { Container } from 'typedi';
 import { dataSourceMap } from '../libs/typeorm';
 import entities from './entities';
+import { docs } from '../config';
 
 export const datasource = new DataSource({
   type: 'mysql',
-  username: 'root',
-  password: '1234',
-  database: 'anogle',
+  username: docs.mysql.username,
+  password: docs.mysql.password,
+  database: docs.mysql.database,
   synchronize: true,
   entities,
 });

@@ -9,8 +9,8 @@ export class UserService extends DddService {
     super();
   }
 
-  async add() {
-    const user = new User({ username: 'theo', password: '1234' });
+  async signup() {
+    const user = User.of({ username: 'theo', password: '1234' });
 
     await this.userRepository.save([user]);
   }
