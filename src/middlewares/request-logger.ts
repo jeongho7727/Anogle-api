@@ -1,7 +1,15 @@
 import type { Context, Next } from 'koa';
-import { logger } from '../libs/logger';
+import { getLoggingContext, logger } from '../libs/logger';
 
 export const requestLoggerMiddleware = async (ctx: Context, next: Next) => {
-  logger.info(`${ctx.URL}`);
-  await next();
+  const start = Date.now();
+
+  try {
+    await next();
+  } finally {
+    const requestDuration = Date.now() - start;
+    logger
+      .child(getLoggingContext(ctx))
+      .info(`[${ctx.method}-${ctx.state.txId}] (${requestDuration}ms)`);
+  }
 };
