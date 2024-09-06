@@ -7,6 +7,7 @@ import { dataSourceMap } from '../libs/ddd/repository';
 export const datasource = new DataSource({
   type: 'mysql',
   entities,
+  synchronize: true,
   ...docs.mysql,
 });
 
