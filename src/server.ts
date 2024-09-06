@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import * as Koa from 'koa';
+import KoaBody, { koaBody } from 'koa-body';
 import * as GracefulShutdown from 'http-graceful-shutdown';
 import { datasource } from './databases/mysql';
 import { dependencyInjectorMiddleware, uuidMiddleware } from './middlewares';
@@ -18,6 +19,7 @@ import { requestLoggerMiddleware } from './middlewares/request-logger';
   app.use(requestLoggerMiddleware);
 
   app.use(dependencyInjectorMiddleware);
+  app.use(koaBody({ multipart: true }));
 
   // NOTE: routes (Don't touch.)
   app.use(globalRouter.middleware());
