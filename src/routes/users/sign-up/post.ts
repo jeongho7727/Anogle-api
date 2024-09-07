@@ -7,6 +7,7 @@ import { UserService } from '../../../services/users/application/service';
 const bodySchema = Joi.object({
   username: Joi.string().required(),
   password: Joi.string().required(),
+  confirmPassword: Joi.string().required(),
 }).required();
 
 const router = new Router();
@@ -14,14 +15,16 @@ const router = new Router();
 router.post('/users/sign-up', async (ctx: Context) => {
   const { context } = ctx.state as { context: DddContext };
   const {
-    value: { username, password },
-  } = bodySchema.validate(ctx.request.body) as { value: { username: string; password: string } };
+    value: { username, password, confirmPassword },
+  } = bodySchema.validate(ctx.request.body) as {
+    value: { username: string; password: string; confirmPassword: string };
+  };
 
   // NOTE: get Context
   const userService = context.get(UserService);
 
   // NOTE: service output
-  await userService.signup({ username, password });
+  await userService.signup({ username, password, confirmPassword });
   ctx.body = {};
 });
 

@@ -6,28 +6,35 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export abstract class Aggregate<T> {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @CreateDateColumn()
+  @Exclude()
+  @CreateDateColumn({ select: false })
   private createdAt!: Date;
 
-  @Column()
+  @Exclude()
+  @Column({ select: false })
   private createdBy!: string;
 
-  @UpdateDateColumn()
+  @Exclude()
+  @UpdateDateColumn({ select: false })
   private updatedAt!: Date;
 
-  @Column()
+  @Exclude()
+  @Column({ select: false })
   private updatedBy!: string;
 
-  @DeleteDateColumn()
+  @Exclude()
+  @DeleteDateColumn({ select: false })
   private deletedAt!: Date;
 
-  @Column({ nullable: true })
+  @Exclude()
+  @Column({ nullable: true, select: false })
   private deletedBy!: string;
 
   setTxId(txId: string) {

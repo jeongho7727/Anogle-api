@@ -25,7 +25,9 @@
   },
   "dependencies": {
     "-": "^0.0.1",
+    "@hapi/boom": "^10.0.1",
     "@koa/router": "^13.0.0",
+    "class-transformer": "^0.5.1",
     "dotenv": "^16.4.5",
     "http-graceful-shutdown": "^3.1.13",
     "joi": "^17.13.3",
