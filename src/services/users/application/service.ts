@@ -3,6 +3,7 @@ import { badRequest } from '@hapi/boom';
 import { User } from '../domain/model';
 import { DddService } from '../../../libs/ddd';
 import { UserRepository } from '../infrastructure/repository';
+import { FilteredUserSpec } from '../domain/specs';
 
 @Service()
 export class UserService extends DddService {
@@ -19,7 +20,9 @@ export class UserService extends DddService {
     password: string;
     confirmPassword: string;
   }) {
-    const [isExistedUser] = await this.userRepository.find({ username });
+    const [isExistedUser] = await this.userRepository.findSatisfying(
+      new FilteredUserSpec({ username })
+    );
     if (isExistedUser) {
       throw badRequest(`${username} is already existed.`, {
         message: `${username} is already existed.`,

@@ -1,16 +1,16 @@
 import 'reflect-metadata';
 import * as Koa from 'koa';
-import KoaBody, { koaBody } from 'koa-body';
+import { koaBody } from 'koa-body';
 import * as GracefulShutdown from 'http-graceful-shutdown';
 import { datasource } from './databases/mysql';
 import {
   dependencyInjectorMiddleware,
   errorHandlerMiddleware,
+  requestLoggerMiddleware,
   uuidMiddleware,
 } from './middlewares';
 import { globalRouter } from './routes';
 import { docs } from './config';
-import { requestLoggerMiddleware } from './middlewares/request-logger';
 
 // NOTE: 옮기자
 

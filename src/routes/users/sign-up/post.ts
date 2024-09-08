@@ -25,6 +25,8 @@ router.post('/users/sign-up', async (ctx: Context) => {
 
   // NOTE: service output
   await userService.signup({ username, password, confirmPassword });
+
+  ctx.status = 201;
   ctx.body = {};
 });
 

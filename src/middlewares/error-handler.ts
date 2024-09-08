@@ -1,5 +1,6 @@
 import { isBoom } from '@hapi/boom';
 import type { Context } from 'koa';
+import { getLoggingContext, logger } from '../libs/logger';
 
 type CustomError = {
   statusCode: number;
@@ -25,6 +26,8 @@ export const errorHandlerMiddleware = async (ctx: Context, next: () => Promise<a
       customError.message = message;
       customError.stack = err.stack;
     }
+
+    logger.child(getLoggingContext(ctx)).error(customError.message);
 
     ctx.status = customError.statusCode;
     ctx.body = { errorMessage: customError.message };
