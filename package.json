@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node -r dotenv/config dist/server.js",
     "start:dev": "ts-node-dev --respawn --transpile-only -r dotenv/config src/server.ts"
   },
   "author": "",
