@@ -4,6 +4,7 @@ import { Aggregate } from '../../../libs/ddd';
 import { badRequest } from '@hapi/boom';
 
 type Creator = {
+  email: string;
   username: string;
   password: string;
   confirmPassword: string;
@@ -11,26 +12,30 @@ type Creator = {
 
 @Entity()
 export class User extends Aggregate<User> {
+  @Column({ unique: true })
+  email!: string;
+
   @Column()
   username!: string;
 
   @Column({ select: false })
   private password!: string;
 
-  private constructor(args: Creator) {
+  private constructor(args: Omit<Creator, 'confirmPassword'>) {
     super();
     if (args) {
-      if (args.password !== args.confirmPassword) {
-        throw badRequest('password and confirmPassword is not same.', {
-          message: 'password and confirmPassword is not same.',
-        });
-      }
+      this.email = args.email;
       this.username = args.username;
       this.password = this.getHashedPassword(args.password);
     }
   }
 
   static of(args: Creator) {
+    if (args.password !== args.confirmPassword) {
+      throw badRequest('password and confirmPassword is not same.', {
+        message: 'password and confirmPassword is not same.',
+      });
+    }
     return new User(args);
   }
 

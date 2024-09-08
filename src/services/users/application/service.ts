@@ -12,24 +12,26 @@ export class UserService extends DddService {
   }
 
   async signup({
+    email,
     username,
     password,
     confirmPassword,
   }: {
+    email: string;
     username: string;
     password: string;
     confirmPassword: string;
   }) {
     const [isExistedUser] = await this.userRepository.findSatisfying(
-      new FilteredUserSpec({ username })
+      new FilteredUserSpec({ email })
     );
     if (isExistedUser) {
-      throw badRequest(`${username} is already existed.`, {
-        message: `${username} is already existed.`,
+      throw badRequest(`${email} is already existed.`, {
+        message: `${email} is already existed.`,
       });
     }
 
-    const user = User.of({ username, password, confirmPassword });
+    const user = User.of({ email, username, password, confirmPassword });
 
     await this.userRepository.save([user]);
   }

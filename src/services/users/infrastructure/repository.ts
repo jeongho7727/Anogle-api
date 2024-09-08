@@ -15,17 +15,19 @@ export class UserRepository extends DddRepository<User> {
     return spec.satisfyingCountFrom(this);
   }
 
-  async find({ username }: { username?: string }) {
+  async find({ email, username }: { email?: string; username?: string }) {
     return this.getManager.find(this.entityClass, {
       where: {
+        email,
         username,
       },
     });
   }
 
-  async count({ username }: { username?: string }) {
+  async count({ email, username }: { email?: string; username?: string }) {
     return this.getManager.count(this.entityClass, {
       where: {
+        email,
         username,
       },
     });
