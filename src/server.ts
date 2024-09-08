@@ -3,7 +3,11 @@ import * as Koa from 'koa';
 import KoaBody, { koaBody } from 'koa-body';
 import * as GracefulShutdown from 'http-graceful-shutdown';
 import { datasource } from './databases/mysql';
-import { dependencyInjectorMiddleware, uuidMiddleware } from './middlewares';
+import {
+  dependencyInjectorMiddleware,
+  errorHandlerMiddleware,
+  uuidMiddleware,
+} from './middlewares';
 import { globalRouter } from './routes';
 import { docs } from './config';
 import { requestLoggerMiddleware } from './middlewares/request-logger';
@@ -17,6 +21,7 @@ import { requestLoggerMiddleware } from './middlewares/request-logger';
 
   app.use(uuidMiddleware);
   app.use(requestLoggerMiddleware);
+  app.use(errorHandlerMiddleware);
 
   app.use(dependencyInjectorMiddleware);
   app.use(koaBody({ multipart: true }));
