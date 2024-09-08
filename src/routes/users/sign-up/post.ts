@@ -5,10 +5,10 @@ import type { DddContext } from '../../../libs/ddd';
 import { UserService } from '../../../services/users/application/service';
 
 const bodySchema = Joi.object({
-  email: Joi.string().required(),
-  username: Joi.string().required(),
-  password: Joi.string().required(),
-  confirmPassword: Joi.string().required(),
+  email: Joi.string().required().description('가입 이메일'),
+  username: Joi.string().required().email().description('사용자 이름'),
+  password: Joi.string().required().description('비밀번호'),
+  confirmPassword: Joi.string().required().description('재확인 비밀번호'),
 }).required();
 
 const router = new Router();

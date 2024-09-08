@@ -12,8 +12,6 @@ import {
 import { globalRouter } from './routes';
 import { docs } from './config';
 
-// NOTE: 옮기자
-
 (async () => {
   await datasource.initialize();
 

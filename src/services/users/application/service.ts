@@ -11,6 +11,9 @@ export class UserService extends DddService {
     super();
   }
 
+  /**
+   * @description 회원가입 API
+   */
   async signup({
     email,
     username,
