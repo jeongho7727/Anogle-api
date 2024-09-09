@@ -27,7 +27,8 @@ export const errorHandlerMiddleware = async (ctx: Context, next: () => Promise<a
       customError.stack = err.stack;
     }
 
-    logger.child(getLoggingContext(ctx)).error(customError.message);
+    console.log(err);
+    // logger.child(getLoggingContext(ctx)).error(customError.message);
 
     ctx.status = customError.statusCode;
     ctx.body = { errorMessage: customError.message };

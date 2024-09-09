@@ -1,7 +1,9 @@
 import { Column, Entity } from 'typeorm';
+import { badRequest } from '@hapi/boom';
+import { sign } from 'jsonwebtoken';
 import { createHash } from 'crypto';
 import { Aggregate } from '../../../libs/ddd';
-import { badRequest } from '@hapi/boom';
+import { docs } from '../../../config';
 
 type Creator = {
   email: string;
@@ -18,7 +20,7 @@ export class User extends Aggregate<User> {
   @Column()
   username!: string;
 
-  @Column({ select: false })
+  @Column()
   private password!: string;
 
   private constructor(args: Omit<Creator, 'confirmPassword'>) {
@@ -43,7 +45,16 @@ export class User extends Aggregate<User> {
     return createHash('sha256').update(password).digest('hex');
   }
 
-  private comparePassword(plainPassword: string) {
+  comparePassword(plainPassword: string) {
     return this.password === this.getHashedPassword(plainPassword);
+  }
+
+  getToken() {
+    return sign(
+      {
+        userId: this.id,
+      },
+      docs.jwtSecret
+    );
   }
 }

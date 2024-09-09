@@ -1,5 +1,5 @@
 import { Service, Inject } from 'typedi';
-import { badRequest } from '@hapi/boom';
+import { badRequest, unauthorized } from '@hapi/boom';
 import { User } from '../domain/model';
 import { DddService } from '../../../libs/ddd';
 import { UserRepository } from '../infrastructure/repository';
@@ -9,6 +9,16 @@ import { FilteredUserSpec } from '../domain/specs';
 export class UserService extends DddService {
   constructor(@Inject() private userRepository: UserRepository) {
     super();
+  }
+
+  async signIn({ email, password }: { email: string; password: string }) {
+    const [user] = await this.userRepository.findSatisfying(new FilteredUserSpec({ email }));
+
+    if (!user || !user.comparePassword(password)) {
+      throw unauthorized('email or password is not correct.');
+    }
+
+    return user.getToken();
   }
 
   /**

@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/koa": "^2.15.0",
     "@types/koa__router": "^12.0.4",
     "@types/uuid": "^10.0.0",
@@ -33,6 +34,7 @@
     "dotenv": "^16.4.5",
     "http-graceful-shutdown": "^3.1.13",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "koa": "^2.15.3",
     "koa-body": "^6.0.1",
     "mysql2": "^3.11.0",

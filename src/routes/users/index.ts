@@ -1,4 +1,5 @@
+import usersSignInRoutes from './sign-in';
 import usersSignupRoutes from './sign-up';
 import usersAttendances from './attendances';
 
-export default [...usersSignupRoutes, ...usersAttendances];
+export default [...usersSignInRoutes, ...usersSignupRoutes, ...usersAttendances];

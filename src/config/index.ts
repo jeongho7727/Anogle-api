@@ -13,6 +13,11 @@ if (!mysqlDatabase) {
   throw new Error('There is no mysql database env. Check please');
 }
 
+const jwtSecret = process.env.JWT_SECRET;
+if (!jwtSecret) {
+  throw new Error('There is no jwt secret env. Check please.');
+}
+
 export const docs = {
   server: {
     port: process.env.PORT || 3000,
@@ -23,4 +28,5 @@ export const docs = {
     password: mysqlPassword,
     database: mysqlDatabase,
   },
+  jwtSecret,
 };
