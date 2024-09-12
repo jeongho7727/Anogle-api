@@ -10,7 +10,6 @@ export const authMiddleware = async (ctx: Context, next: Next) => {
   const accessToken = ctx.request.headers['authorization'] || '';
 
   if (!accessToken) {
-    // TODO: 에러 인증 오류
     throw unauthorized('There is no access token.');
   }
 
